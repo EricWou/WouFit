@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">WouFit</string>
+    <string name="app_title_text_view">WouFit</string>
 </resources>
