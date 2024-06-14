@@ -1,4 +1,11 @@
 <resources>
+    <!-- Strings for activity_main -->
     <string name="app_name">WouFit</string>
+    <!--
     <string name="app_title_text_view">WouFit</string>
+    <string name="email_title_text_view">Email</string>
+    <string name="email_input_text_view"> </string>
+    <string name="password_title_text_view">Password</string>
+    <string name="password_input_text_view"> </string>
+    -->
 </resources>

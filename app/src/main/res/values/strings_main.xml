@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_title_text_view">WouFit</string>
+    <string name="email_title_text_view">Email</string>
+    <string name="email_input_edit_text"> </string>
+    <string name="password_title_text_view">Password</string>
+    <string name="password_input_edit_text"> </string>
+    <string name="login_button">Login</string>
+    <string name="register_title_text_view">Don\'t already have an account?</string>
+    <string name="register_button">Register</string>
+</resources>
