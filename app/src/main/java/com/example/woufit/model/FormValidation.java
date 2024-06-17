@@ -20,5 +20,5 @@ public class FormValidation {
 
         return (!TextUtils.isEmpty(inputEmail) && Patterns.EMAIL_ADDRESS.matcher(inputEmail).matches());
     }
-    
+
 }
