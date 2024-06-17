@@ -1,5 +1,6 @@
 package com.example.woufit;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Patterns;
@@ -10,6 +11,7 @@ import android.widget.ImageButton;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -25,6 +27,11 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
     private ArrayList<Users> usersArrayList;
+    /*
+    public static String TAG = "WouFit Project";
+    public static String KEY_EMAIL = "email";
+    public static String KEY_PASSWORD = "password";
+     */
 
     Users user1 = new Users("U001",
                             "Jerry",
@@ -49,15 +56,42 @@ public class MainActivity extends AppCompatActivity {
         usersArrayList.add(user1);
         usersArrayList.add(user2);
 
-        emailInputEditText = findViewById(R.id.email_input_edit_text);
-        passwordInputEditText = findViewById(R.id.password_input_edit_text);
-        loginButton = findViewById(R.id.login_button);
-        registerButton = findViewById(R.id.register_button);
+        findViews();
 
         registerButton.setOnClickListener(v -> {
             registerDialog();
         });
 
+        loginButton.setOnClickListener(v1 -> {
+            String userEmail = emailInputEditText.getText().toString();
+            String userPassword = passwordInputEditText.getText().toString();
+
+            boolean loginSuccess = false;
+
+            for (int i=0;i<usersArrayList.size();i++) {
+                if (userEmail.equals(usersArrayList.get(i).getUserEmail())) {
+                    if (userPassword.equals(usersArrayList.get(i).getUserPassword())) {
+                        Intent intent = account_initialization.newIntent(MainActivity.this,
+                                                                usersArrayList.get(i).getUserFName());
+                        loginSuccess = true;
+                        startActivity(intent);
+                    }
+                }
+            }
+
+            if (!loginSuccess) {
+                Toast.makeText(MainActivity.this, "Invalid email/password",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
+    private void findViews() {
+        emailInputEditText = findViewById(R.id.email_input_edit_text);
+        passwordInputEditText = findViewById(R.id.password_input_edit_text);
+        loginButton = findViewById(R.id.login_button);
+        registerButton = findViewById(R.id.register_button);
     }
 
     //consider changing to a DialogFragment for more functionality (see documentation)
@@ -74,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
         //looking for register button to add onClickListener
         Button confirmRegistration = registerLayout.findViewById(R.id.register_confirm_button);
-        confirmRegistration.setOnClickListener(v1 -> {
+        confirmRegistration.setOnClickListener(v -> {
 
             EditText firstNameEditText = registerLayout.findViewById(R.id.first_name_register_edit_text);
             EditText lastNameEditText = registerLayout.findViewById(R.id.last_name_register_edit_text);
@@ -106,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
         //looking for close button to add onClickListener
         ImageButton toolbarCloseButton = registerLayout.findViewById(R.id.register_toolbar)
                                                         .findViewById(R.id.register_toolbar_close_button);
-        toolbarCloseButton.setOnClickListener(v2 -> {
+        toolbarCloseButton.setOnClickListener(v1 -> {
             dialog.dismiss();
         });
     }
@@ -131,5 +165,13 @@ public class MainActivity extends AppCompatActivity {
         }
         return false;
     }
+
+    /* maybe implement landscape mode
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle onSavedInstanceState) {
+        super.onSaveInstanceState(onSavedInstanceState);
+
+    }
+     */
 
 }

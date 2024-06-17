@@ -3,7 +3,6 @@ package com.example.woufit.model;
 import android.text.TextUtils;
 import android.util.Patterns;
 import android.widget.EditText;
-import android.widget.Toast;
 
 public class FormValidation {
 

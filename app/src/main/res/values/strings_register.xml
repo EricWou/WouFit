@@ -4,6 +4,6 @@
     <string name="last_name_register_edit_text"> </string>
     <string name="email_register_edit_text"> </string>
     <string name="password_register_edit_text"> </string>
-    <string name="register_confirm_button">Confirm registration</string>
     <string name="register_toolbar_dialog_text_view">Register new account</string>
+    <string name="register_confirm_button">Confirm registration</string>
 </resources>

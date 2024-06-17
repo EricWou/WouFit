@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:paddingBottom="50dp" >
 
+    <!-- Adds a toolbar to the top of the page -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/register_toolbar"
         android:layout_width="match_parent"
@@ -32,6 +33,7 @@
             android:textSize="22sp"
             android:textStyle="bold" />
 
+        <!-- For the X button on the top right -->
         <ImageButton
             android:id="@+id/register_toolbar_close_button"
             android:layout_width="50dp"
