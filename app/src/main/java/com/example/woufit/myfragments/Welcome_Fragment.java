@@ -30,9 +30,21 @@ public class Welcome_Fragment extends Fragment {
         user = requireArguments().getParcelable("user");
         //retrieving view from welcome_fragment
         welcomeFragmentTitleTextView = getView().findViewById(R.id.welcome_fragment_title_text_view);
-        
+
         String greeting = "Welcome "+user.getUserFName();
         welcomeFragmentTitleTextView.setText(greeting);
+
+        getStartedButton = getView().findViewById(R.id.get_started_button);
+        getStartedButton.setOnClickListener(v -> {
+            //getParentFragmentManager() retrieves the FragmentManager from the parent
+            //the parent in this case is account_initialization.java
+            getParentFragmentManager().beginTransaction()
+                    .setReorderingAllowed(true)
+                    .replace(R.id.initialization_fragment_container_view, Goal_Fragment.class, null)
+                    .commit();
+
+            //implement stack to allow going back and forth between fragments
+        });
     }
 
 }
