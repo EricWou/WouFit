@@ -1,6 +1,11 @@
 package com.example.woufit.model;
 
-public class Users {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
+
+public class Users implements Parcelable {
 
     private String userID;
     private String userFName;
@@ -9,6 +14,8 @@ public class Users {
     private String userPassword;
     //change to hashcode for better security
     private Boolean firstLogin;
+    private Parcel dest;
+    private int flags;
 
     public Users() {
         this.userID = "";
@@ -32,6 +39,29 @@ public class Users {
         this.userPassword = userPassword;
         this.firstLogin = firstLogin;
     }
+
+    protected Users(Parcel in) {
+        userID = in.readString();
+        userFName = in.readString();
+        userLName = in.readString();
+        userEmail = in.readString();
+        userPassword = in.readString();
+        byte tmpFirstLogin = in.readByte();
+        firstLogin = tmpFirstLogin == 0 ? null : tmpFirstLogin == 1;
+        flags = in.readInt();
+    }
+
+    public static final Creator<Users> CREATOR = new Creator<Users>() {
+        @Override
+        public Users createFromParcel(Parcel in) {
+            return new Users(in);
+        }
+
+        @Override
+        public Users[] newArray(int size) {
+            return new Users[size];
+        }
+    };
 
     public String getUserID() {
         return userID;
@@ -91,5 +121,22 @@ public class Users {
                 ", userPassword='" + userPassword + '\'' +
                 ", firstLogin=" + firstLogin +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+
+        dest.writeString(userID);
+        dest.writeString(userFName);
+        dest.writeString(userLName);
+        dest.writeString(userEmail);
+        dest.writeString(userPassword);
+        dest.writeByte((byte) (firstLogin == null ? 0 : firstLogin ? 1 : 2));
+        dest.writeInt(flags);
     }
 }

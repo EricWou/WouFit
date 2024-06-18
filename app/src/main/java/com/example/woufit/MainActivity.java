@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private Button loginButton;
     private Button registerButton;
     private ArrayList<Users> usersArrayList;
+
     /*
     public static String TAG = "WouFit Project";
     public static String KEY_EMAIL = "email";
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
                 if (userEmail.equals(usersArrayList.get(i).getUserEmail())) {
                     if (userPassword.equals(usersArrayList.get(i).getUserPassword())) {
                         Intent intent = account_initialization.newIntent(MainActivity.this,
-                                                                usersArrayList.get(i).getUserFName());
+                                                                usersArrayList.get(i));
                         loginSuccess = true;
                         startActivity(intent);
                     }

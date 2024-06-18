@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="greeting_text_view">Welcome</string>
+    <string name="welcome_fragment_title_text_view">Welcome</string>
+    <string name="welcome_fragment_greeting1_text_view">Before we get started we have a few
+        questions we would like you to answer</string>
+    <string name="welcome_fragment_greeting2_text_view">This will help us to personalize
+        your workout plan and will only take a few minutes</string>
+    <string name="get_started_button">Get started</string>
+
 </resources>

@@ -7,16 +7,14 @@
     tools:context=".account_initialization">
     <!-- need to include an id? -->
 
-    <TextView
-        android:id="@+id/greeting_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/greeting_text_view"
+    <!-- necessary to be inside ConstraintLayout or can be the outer layer? -->
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/initialization_fragment_container_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.125" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
