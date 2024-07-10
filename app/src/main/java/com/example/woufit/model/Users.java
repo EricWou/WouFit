@@ -7,47 +7,57 @@ import androidx.annotation.NonNull;
 
 public class Users implements Parcelable {
 
-    private String userID;
+    private int userID;
     private String userFName;
     private String userLName;
     private String userEmail;
     private String userPassword;
     //change to hashcode for better security
     private Boolean firstLogin;
+    private int prefID;
+    private int programID;
     private Parcel dest;
     private int flags;
 
     public Users() {
-        this.userID = "";
+        this.userID = 0;
         this.userFName = "";
         this.userLName = "";
         this.userEmail = "";
         this.userPassword = "";
         this.firstLogin = false;
+        this.prefID = 0;
+        this.programID = 0;
     }
 
-    public Users(String userID,
+    public Users(int userID,
                  String userFName,
                  String userLName,
                  String userEmail,
                  String userPassword,
-                 Boolean firstLogin) {
+                 Boolean firstLogin,
+                 int prefID,
+                 int programID) {
         this.userID = userID;
         this.userFName = userFName;
         this.userLName = userLName;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.firstLogin = firstLogin;
+        this.prefID = prefID;
+        this.programID = programID;
     }
 
     protected Users(Parcel in) {
-        userID = in.readString();
+        userID = in.readInt();
         userFName = in.readString();
         userLName = in.readString();
         userEmail = in.readString();
         userPassword = in.readString();
         byte tmpFirstLogin = in.readByte();
         firstLogin = tmpFirstLogin == 0 ? null : tmpFirstLogin == 1;
+        prefID = in.readInt();
+        programID = in.readInt();
         flags = in.readInt();
     }
 
@@ -63,11 +73,11 @@ public class Users implements Parcelable {
         }
     };
 
-    public String getUserID() {
+    public int getUserID() {
         return userID;
     }
 
-    public void setUserID(String userID) {
+    public void setUserID(int userID) {
         this.userID = userID;
     }
 
@@ -111,15 +121,35 @@ public class Users implements Parcelable {
         this.firstLogin = firstLogin;
     }
 
+    public int getPrefID() {
+        return prefID;
+    }
+
+    public void setPrefID(int prefID) {
+        this.prefID = prefID;
+    }
+
+    public int getProgramID() {
+        return programID;
+    }
+
+    public void setProgramID(int programID) {
+        this.programID = programID;
+    }
+
     @Override
     public String toString() {
         return "Users{" +
-                "userID='" + userID + '\'' +
+                "userID=" + userID +
                 ", userFName='" + userFName + '\'' +
                 ", userLName='" + userLName + '\'' +
                 ", userEmail='" + userEmail + '\'' +
                 ", userPassword='" + userPassword + '\'' +
                 ", firstLogin=" + firstLogin +
+                ", prefID=" + prefID +
+                ", programID=" + programID +
+                ", dest=" + dest +
+                ", flags=" + flags +
                 '}';
     }
 
@@ -131,12 +161,14 @@ public class Users implements Parcelable {
     @Override
     public void writeToParcel(@NonNull Parcel dest, int flags) {
 
-        dest.writeString(userID);
+        dest.writeInt(userID);
         dest.writeString(userFName);
         dest.writeString(userLName);
         dest.writeString(userEmail);
         dest.writeString(userPassword);
         dest.writeByte((byte) (firstLogin == null ? 0 : firstLogin ? 1 : 2));
+        dest.writeInt(prefID);
+        dest.writeInt(programID);
         dest.writeInt(flags);
     }
 }

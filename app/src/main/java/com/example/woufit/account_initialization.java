@@ -1,7 +1,5 @@
 package com.example.woufit;
 
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,14 +7,9 @@ import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.woufit.model.Users;
 import com.example.woufit.myfragments.Welcome_Fragment;
-
-import java.util.ArrayList;
 
 public class account_initialization extends AppCompatActivity {
 
@@ -47,9 +40,10 @@ public class account_initialization extends AppCompatActivity {
             bundle.putParcelable("user", getIntent().getParcelableExtra(EXTRA_USER));
 
             //transferring view to Welcome_Fragment.java
-            getSupportFragmentManager().beginTransaction()
+            getSupportFragmentManager()
+                    .beginTransaction()
                     .setReorderingAllowed(true)
-                    .add(R.id.initialization_fragment_container_view, Welcome_Fragment.class, bundle)
+                    .add(R.id.initialization_fragment_container, Welcome_Fragment.class, bundle)
                     .commit();
         }
 

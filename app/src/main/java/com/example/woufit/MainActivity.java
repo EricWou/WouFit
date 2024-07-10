@@ -34,18 +34,22 @@ public class MainActivity extends AppCompatActivity {
     public static String KEY_PASSWORD = "password";
      */
 
-    Users user1 = new Users("U001",
+    Users user1 = new Users(001,
                             "Jerry",
                             "Springer",
                             "jspringer@gmail.com",
                             "nohackplease",
-                            false);
-    Users user2 = new Users("U002",
+                            false,
+                            001,
+                            001);
+    Users user2 = new Users(002,
                             "Jon",
                             "Snow",
                             "lordcommander@gmail.com",
                             "youknownothing",
-                            false);
+                            false,
+                            002,
+                            002);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
 
                 //adds the new user to "database"
-                Users newUser = new Users("U003", firstName, lastName, email, password, true);
+                Users newUser = new Users(003, firstName, lastName, email, password, true, 003, 003);
                 usersArrayList.add(newUser);
 
                 //sets the email and password on login page to newly created account

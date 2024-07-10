@@ -9,7 +9,7 @@
 
     <!-- necessary to be inside ConstraintLayout or can be the outer layer? -->
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/initialization_fragment_container_view"
+        android:id="@+id/initialization_fragment_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"

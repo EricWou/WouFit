@@ -1,9 +1,7 @@
 package com.example.woufit.myfragments;
 
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -40,7 +38,7 @@ public class Welcome_Fragment extends Fragment {
             //the parent in this case is account_initialization.java
             getParentFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.initialization_fragment_container_view, Goal_Fragment.class, null)
+                    .replace(R.id.initialization_fragment_container, Goal_Fragment.class, null)
                     .commit();
 
             //implement stack to allow going back and forth between fragments
