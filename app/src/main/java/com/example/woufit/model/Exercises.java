@@ -7,6 +7,8 @@ public class Exercises {
     private String exsCategory;
     private String equipmentNeeded;
     private String difficulty;
+    private String primaryMuscle;
+    private String secondaryMuscle;
 
     public Exercises() {
         this.exsID = 0;
@@ -14,18 +16,24 @@ public class Exercises {
         this.exsCategory = "";
         this.equipmentNeeded = "";
         this.difficulty = "";
+        this.primaryMuscle = "";
+        this.secondaryMuscle = "";
     }
 
     public Exercises(int exsID,
                      String exsName,
                      String exsCategory,
                      String equipmentNeeded,
-                     String difficulty) {
+                     String difficulty,
+                     String primaryMuscle,
+                     String secondaryMuscle) {
         this.exsID = exsID;
         this.exsName = exsName;
         this.exsCategory = exsCategory;
         this.equipmentNeeded = equipmentNeeded;
         this.difficulty = difficulty;
+        this.primaryMuscle = primaryMuscle;
+        this.secondaryMuscle = secondaryMuscle;
     }
 
     public int getExsID() {
@@ -68,6 +76,22 @@ public class Exercises {
         this.difficulty = difficulty;
     }
 
+    public String getPrimaryMuscle() {
+        return primaryMuscle;
+    }
+
+    public void setPrimaryMuscle(String primaryMuscle) {
+        this.primaryMuscle = primaryMuscle;
+    }
+
+    public String getSecondaryMuscle() {
+        return secondaryMuscle;
+    }
+
+    public void setSecondaryMuscle(String secondaryMuscle) {
+        this.secondaryMuscle = secondaryMuscle;
+    }
+
     @Override
     public String toString() {
         return "Exercises{" +
@@ -76,6 +100,8 @@ public class Exercises {
                 ", exsCategory='" + exsCategory + '\'' +
                 ", equipmentNeeded='" + equipmentNeeded + '\'' +
                 ", difficulty='" + difficulty + '\'' +
+                ", primaryMuscle='" + primaryMuscle + '\'' +
+                ", secondaryMuscle='" + secondaryMuscle + '\'' +
                 '}';
     }
 }
