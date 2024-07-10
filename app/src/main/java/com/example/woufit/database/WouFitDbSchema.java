@@ -19,6 +19,17 @@ public class WouFitDbSchema {
         }
     }
 
+    public static final class SaltTable {
+
+        public static final String NAME = "salt";
+
+        public static final class Columns {
+
+            public static final String SALT_ID = "saltID";
+            public static final String SALT_STRING = "saltString";
+        }
+    }
+
     public static final class PreferencesTable {
 
         public static final String NAME = "preferences";
