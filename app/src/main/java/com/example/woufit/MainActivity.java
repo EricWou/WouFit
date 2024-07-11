@@ -62,34 +62,8 @@ public class MainActivity extends AppCompatActivity implements Executor {
         usersDao = db.usersDao();
         saltDao = db.saltDao();
 
-        /*
-        //used for generating the initial salt String and test user
-        //creates new Thread so that the database methods can happen in the background
-        execute(new Runnable() {
-            @Override
-            public void run() {
-                //creating saltString for 1st run
-                Salt salt;
-                try {
-                    salt = new Salt(PasswordHashing.computeSalt());
-                } catch (NoSuchAlgorithmException e) {
-                    throw new RuntimeException(e);
-                }
-                saltDao.createSaltString(salt);
-
-                //creating test user for 1st run
-                Users user1 = new Users("Jerry",
-                        "Springer",
-                        "test@gmail.com",
-                        "test",
-                        false);
-                String passwordToHash = user1.getUserPassword();
-                user1.setUserPassword(PasswordHashing.hashPassword(passwordToHash, salt.getSaltString()));
-
-                usersDao.createUser(user1);
-            }
-        });
-         */
+        //used for generating the initial salt String and test user (comment after first use)
+        //createSaltStringAndTestUser();
 
         findViews();
 
@@ -99,38 +73,35 @@ public class MainActivity extends AppCompatActivity implements Executor {
 
         loginButton.setOnClickListener(v1 -> {
             //creates new Thread so that the database methods can happen in the background
-            execute(new Runnable() {
-                @Override
-                public void run() {
-                    String userEmail = emailInputEditText.getText().toString();
-                    String userPassword = passwordInputEditText.getText().toString();
+            execute(() -> {
+                String userEmail = emailInputEditText.getText().toString();
+                String userPassword = passwordInputEditText.getText().toString();
 
-                    boolean loginSuccess = false;
+                boolean loginSuccess = false;
 
-                    //retrieving password from database if userEmail exists
-                    String comparePassword = usersDao.compareLogin(userEmail);
+                //retrieving password from database if userEmail exists
+                String comparePassword = usersDao.compareLogin(userEmail);
 
-                    if (comparePassword != null) {
-                        String saltString = saltDao.readSaltString();
-                        String hashPassword = PasswordHashing.hashPassword(userPassword, saltString);
+                if (comparePassword != null) {
+                    String saltString = saltDao.readSaltString();
+                    String hashPassword = PasswordHashing.hashPassword(userPassword, saltString);
 
-                        if (hashPassword.equals(comparePassword)) {
-                            loginSuccess = true;
+                    if (hashPassword.equals(comparePassword)) {
+                        loginSuccess = true;
 
-                            Users loginUser = usersDao.retrieveLoginUser(userEmail);
+                        Users loginUser = usersDao.retrieveLoginUser(userEmail);
 
-                            Intent account_initialization_intent = new Intent(getApplicationContext(),
-                                    account_initialization.class);
-                            account_initialization_intent.putExtra(EXTRA_USER, loginUser);
+                        Intent account_initialization_intent = new Intent(getApplicationContext(),
+                                account_initialization.class);
+                        account_initialization_intent.putExtra(EXTRA_USER, loginUser);
 
-                            startActivity(account_initialization_intent);
-                        }
+                        startActivity(account_initialization_intent);
                     }
+                }
 
-                    if (!loginSuccess) {
-                        Toast.makeText(MainActivity.this, "Invalid email/password",
-                                Toast.LENGTH_SHORT).show();
-                    }
+                if (!loginSuccess) {
+                    Toast.makeText(MainActivity.this, "Invalid email/password",
+                            Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -168,15 +139,17 @@ public class MainActivity extends AppCompatActivity implements Executor {
 
                 Users newUser = new Users(firstName, lastName, email, password, true);
 
-                /*
-                //adds the new user to "database"
-                Users newUser = new Users(firstName, lastName, email, password, true);
-                usersArrayList.add(newUser);
-                 */
+                //the Thread can be a small part of a bigger code
+                execute(() -> {
+                    String saltString = saltDao.readSaltString();
+                    String hashPassword = PasswordHashing.hashPassword(newUser.getUserPassword(), saltString);
+                    newUser.setUserPassword(hashPassword);
 
-                //sets the email and password on login page to newly created account
+                    usersDao.createUser(newUser);
+                });
+
+                //sets the email on login page to newly created account
                 emailInputEditText.setText(email);
-                passwordInputEditText.setText(password);
 
                 dialog.dismiss();
 
@@ -231,6 +204,32 @@ public class MainActivity extends AppCompatActivity implements Executor {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    //used for generating the initial salt String and test user
+    private void createSaltStringAndTestUser() {
+        //creates new Thread so that the database methods can happen in the background
+        execute(() -> {
+            //creating saltString for 1st run
+            Salt salt;
+            try {
+                salt = new Salt(PasswordHashing.computeSalt());
+            } catch (NoSuchAlgorithmException e) {
+                throw new RuntimeException(e);
+            }
+            saltDao.createSaltString(salt);
+
+            //creating test user for 1st run
+            Users user1 = new Users("Jerry",
+                    "Springer",
+                    "test@gmail.com",
+                    "test",
+                    false);
+            String passwordToHash = user1.getUserPassword();
+            user1.setUserPassword(PasswordHashing.hashPassword(passwordToHash, salt.getSaltString()));
+
+            usersDao.createUser(user1);
+        });
     }
 
     /* maybe implement landscape mode

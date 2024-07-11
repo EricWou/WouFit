@@ -1,4 +1,4 @@
-package com.example.woufit.myfragments;
+package com.example.woufit.initializationfragments;
 
 import android.os.Bundle;
 import android.view.View;
@@ -18,14 +18,19 @@ public class Welcome_Fragment extends Fragment {
     private Users user;
 
     public Welcome_Fragment() {
-        super(R.layout.welcome_fragment);
+        super(R.layout.init_welcome_fragment);
     }
 
+    //onViewCreated is called immediately after onCreateView()
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
-        //onViewCreated is called immediately after onCreateView()
+        super.onViewCreated(view, savedInstanceState);
 
         //retrieving data from Bundle object containing key "user"
         user = requireArguments().getParcelable("user");
+
+        Bundle bundle = new Bundle();
+        bundle.putParcelable("user", user);
+
         //retrieving view from welcome_fragment
         welcomeFragmentTitleTextView = getView().findViewById(R.id.welcome_fragment_title_text_view);
 
@@ -38,7 +43,14 @@ public class Welcome_Fragment extends Fragment {
             //the parent in this case is account_initialization.java
             getParentFragmentManager().beginTransaction()
                     .setReorderingAllowed(true)
-                    .replace(R.id.initialization_fragment_container, Goal_Fragment.class, null)
+                    .addToBackStack("Goal")
+                    .setCustomAnimations(
+                            R.anim.slide_in,  // enter
+                            R.anim.fade_out,  // exit
+                            R.anim.fade_in,   // popEnter
+                            R.anim.slide_out  // popExit
+                    )
+                    .replace(R.id.initialization_fragment_container, Goal_Fragment.class, bundle)
                     .commit();
 
             //implement stack to allow going back and forth between fragments

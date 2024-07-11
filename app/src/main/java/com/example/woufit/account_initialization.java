@@ -1,15 +1,12 @@
 package com.example.woufit;
 
-import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.woufit.model.Users;
-import com.example.woufit.myfragments.Welcome_Fragment;
+import com.example.woufit.initializationfragments.Welcome_Fragment;
 
 public class account_initialization extends AppCompatActivity {
 
@@ -46,6 +43,13 @@ public class account_initialization extends AppCompatActivity {
             getSupportFragmentManager()
                     .beginTransaction()
                     .setReorderingAllowed(true)
+                    .addToBackStack("Welcome")
+                    .setCustomAnimations(
+                            R.anim.slide_in,  // enter
+                            R.anim.fade_out,  // exit
+                            R.anim.fade_in,   // popEnter
+                            R.anim.slide_out  // popExit
+                    )
                     .add(R.id.initialization_fragment_container, Welcome_Fragment.class, bundle)
                     .commit();
         }
