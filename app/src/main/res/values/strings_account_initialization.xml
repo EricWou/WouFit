@@ -10,11 +10,11 @@
     <string name="get_started_button">Get started</string>
 
     <string name="goal_fragment_title_text_view">What are your goals for working out?</string>
-    <string name="goal_fragment_description_text_view">Select one or more of the following:</string>
+    <string name="goal_fragment_description_text_view">Select one of the following:</string>
     <string name="strength_radio_button">Strength</string>
     <string name="endurance_radio_button">Endurance</string>
     <string name="flexibility_radio_button">Flexibility</string>
-    <string name="goal_fragment_next_button">Next</string>
+    <string name="next_button">Next</string>
 
     <string name="freq_fragment_title_text_view">How many different workouts in a week would you like?</string>
 

@@ -10,22 +10,6 @@ import com.example.woufit.initializationfragments.Welcome_Fragment;
 
 public class account_initialization extends AppCompatActivity {
 
-    private TextView greetingTextView;
-    //private Users userRetrieve;
-    //private static String EXTRA_USER = "com.example.woufit.model.Users";
-
-    /*
-    public static Intent newIntent(Context packageContext, Users importUser) {
-
-        Intent intent = new Intent(packageContext, account_initialization.class);
-
-        //codes the data into EXTRA parameters
-        intent.putExtra(EXTRA_USER, importUser);
-
-        return intent;
-    }
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

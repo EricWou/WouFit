@@ -1,10 +1,14 @@
 package com.example.woufit.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
-public class Preferences {
+public class Preferences implements Parcelable {
 
     @PrimaryKey(autoGenerate = true)
     private int prefID;
@@ -48,6 +52,34 @@ public class Preferences {
         this.machines = machines;
         this.noEquipment = noEquipment;
     }
+
+    protected Preferences(Parcel in) {
+        prefID = in.readInt();
+        fitnessGoal = in.readString();
+        freqPerWeek = in.readInt();
+        durationWorkout = in.readInt();
+        workoutSpace = in.readString();
+        byte tmpWeights = in.readByte();
+        weights = tmpWeights == 0 ? null : tmpWeights == 1;
+        byte tmpResistanceBands = in.readByte();
+        resistanceBands = tmpResistanceBands == 0 ? null : tmpResistanceBands == 1;
+        byte tmpMachines = in.readByte();
+        machines = tmpMachines == 0 ? null : tmpMachines == 1;
+        byte tmpNoEquipment = in.readByte();
+        noEquipment = tmpNoEquipment == 0 ? null : tmpNoEquipment == 1;
+    }
+
+    public static final Creator<Preferences> CREATOR = new Creator<Preferences>() {
+        @Override
+        public Preferences createFromParcel(Parcel in) {
+            return new Preferences(in);
+        }
+
+        @Override
+        public Preferences[] newArray(int size) {
+            return new Preferences[size];
+        }
+    };
 
     public int getPrefID() {
         return prefID;
@@ -134,5 +166,23 @@ public class Preferences {
                 ", machines=" + machines +
                 ", noEquipment=" + noEquipment +
                 '}';
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(@NonNull Parcel dest, int flags) {
+        dest.writeInt(prefID);
+        dest.writeString(fitnessGoal);
+        dest.writeInt(freqPerWeek);
+        dest.writeInt(durationWorkout);
+        dest.writeString(workoutSpace);
+        dest.writeByte((byte) (weights == null ? 0 : weights ? 1 : 2));
+        dest.writeByte((byte) (resistanceBands == null ? 0 : resistanceBands ? 1 : 2));
+        dest.writeByte((byte) (machines == null ? 0 : machines ? 1 : 2));
+        dest.writeByte((byte) (noEquipment == null ? 0 : noEquipment ? 1 : 2));
     }
 }

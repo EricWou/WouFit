@@ -18,38 +18,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.2" />
 
-    <RadioButton
-        android:id="@+id/strength_radio_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/strength_radio_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/goal_fragment_description_text_view" />
-
-    <RadioButton
-        android:id="@+id/endurance_radio_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/endurance_radio_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/strength_radio_button" />
-
-    <RadioButton
-        android:id="@+id/flexibility_radio_button"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="@string/flexibility_radio_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/endurance_radio_button" />
-
     <TextView
         android:id="@+id/goal_fragment_description_text_view"
         android:layout_width="wrap_content"
@@ -61,14 +29,47 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/goal_fragment_title_text_view" />
 
+    <RadioGroup
+        android:id="@+id/goal_fragment_radio_group"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/goal_fragment_description_text_view" >
+
+        <RadioButton
+            android:id="@+id/strength_radio_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/strength_radio_button" />
+
+        <RadioButton
+            android:id="@+id/endurance_radio_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/endurance_radio_button" />
+
+        <RadioButton
+            android:id="@+id/flexibility_radio_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/flexibility_radio_button" />
+
+    </RadioGroup>
+
     <Button
         android:id="@+id/goal_fragment_next_button"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="50dp"
-        android:text="@string/goal_fragment_next_button"
+        android:text="@string/next_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/flexibility_radio_button" />
+        app:layout_constraintTop_toBottomOf="@+id/goal_fragment_radio_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
