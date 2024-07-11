@@ -1,7 +1,12 @@
 package com.example.woufit.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Parameters {
 
+    @PrimaryKey(autoGenerate = true)
     private int paramID;
     private int exsID;
     private String resistance;

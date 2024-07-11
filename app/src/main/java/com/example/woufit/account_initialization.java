@@ -14,9 +14,10 @@ import com.example.woufit.myfragments.Welcome_Fragment;
 public class account_initialization extends AppCompatActivity {
 
     private TextView greetingTextView;
-    private Users userRetrieve;
-    private static String EXTRA_USER = "com.example.woufit.model.Users";
+    //private Users userRetrieve;
+    //private static String EXTRA_USER = "com.example.woufit.model.Users";
 
+    /*
     public static Intent newIntent(Context packageContext, Users importUser) {
 
         Intent intent = new Intent(packageContext, account_initialization.class);
@@ -26,6 +27,7 @@ public class account_initialization extends AppCompatActivity {
 
         return intent;
     }
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,10 +36,11 @@ public class account_initialization extends AppCompatActivity {
         setContentView(R.layout.activity_account_initialization);
 
         if (savedInstanceState == null) {
+
             //using Bundle class to send data of Users object to Welcome_Fragment.java
             Bundle bundle = new Bundle();
             //placing data from EXTRA_USER inside key-value pair of key "user"
-            bundle.putParcelable("user", getIntent().getParcelableExtra(EXTRA_USER));
+            bundle.putParcelable("user", getIntent().getParcelableExtra(MainActivity.EXTRA_USER));
 
             //transferring view to Welcome_Fragment.java
             getSupportFragmentManager()

@@ -1,9 +1,14 @@
 package com.example.woufit.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.util.ArrayList;
 
+//@Entity
 public class Programs {
 
+    //@PrimaryKey(autoGenerate = true)
     private int programID;
     private ArrayList<Integer> workout1;
     private ArrayList<Integer> workout2;

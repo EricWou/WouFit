@@ -4,23 +4,50 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.Ignore;
+import androidx.room.Index;
+import androidx.room.PrimaryKey;
 
+@Entity(indices = {@Index(value = "userEmail", unique = true)})
 public class Users implements Parcelable {
 
+    @PrimaryKey(autoGenerate = true)
     private int userID;
     private String userFName;
     private String userLName;
     private String userEmail;
     private String userPassword;
-    //change to hashcode for better security
     private Boolean firstLogin;
     private int prefID;
     private int programID;
+    @Ignore
     private Parcel dest;
+    @Ignore
     private int flags;
 
     public Users() {
-        this.userID = 0;
+        this.userFName = "";
+        this.userLName = "";
+        this.userEmail = "";
+        this.userPassword = "";
+        this.firstLogin = false;
+    }
+
+    public Users(String userFName,
+                 String userLName,
+                 String userEmail,
+                 String userPassword,
+                 Boolean firstLogin) {
+        this.userFName = userFName;
+        this.userLName = userLName;
+        this.userEmail = userEmail;
+        this.userPassword = userPassword;
+        this.firstLogin = firstLogin;
+    }
+
+    /*
+    public Users() {
         this.userFName = "";
         this.userLName = "";
         this.userEmail = "";
@@ -30,15 +57,13 @@ public class Users implements Parcelable {
         this.programID = 0;
     }
 
-    public Users(int userID,
-                 String userFName,
+    public Users(String userFName,
                  String userLName,
                  String userEmail,
                  String userPassword,
                  Boolean firstLogin,
                  int prefID,
                  int programID) {
-        this.userID = userID;
         this.userFName = userFName;
         this.userLName = userLName;
         this.userEmail = userEmail;
@@ -47,6 +72,8 @@ public class Users implements Parcelable {
         this.prefID = prefID;
         this.programID = programID;
     }
+
+     */
 
     protected Users(Parcel in) {
         userID = in.readInt();

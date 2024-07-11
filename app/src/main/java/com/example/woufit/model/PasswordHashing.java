@@ -8,7 +8,7 @@ import java.security.SecureRandom;
 public class PasswordHashing {
 
     //to hash the password
-    public static String hash_SHA_512_Password(String passwordToHash, String salt) {
+    public static String hashPassword(String passwordToHash, String salt) {
 
         String generatedPassword = null;
 

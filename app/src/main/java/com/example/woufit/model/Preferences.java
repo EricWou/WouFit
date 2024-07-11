@@ -1,7 +1,12 @@
 package com.example.woufit.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Preferences {
 
+    @PrimaryKey(autoGenerate = true)
     private int prefID;
     private String fitnessGoal;
     private int freqPerWeek;

@@ -1,7 +1,12 @@
 package com.example.woufit.model;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Exercises {
 
+    @PrimaryKey(autoGenerate = true)
     private int exsID;
     private String exsName;
     private String exsCategory;
