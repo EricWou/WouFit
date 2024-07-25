@@ -1,6 +1,85 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#6FC4EC">
+
+    <TextView
+        android:id="@+id/duration_fragment_title_text_view"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:text="@string/duration_fragment_title_text_view"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.167" />
+
+    <TextView
+        android:id="@+id/duration_fragment_description_text_view"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:shadowColor="#2C2A2A"
+        android:shadowRadius="5"
+        android:text="@string/duration_fragment_description_text_view"
+        android:textColor="#E1DADA"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/duration_fragment_title_text_view" />
+
+    <RadioGroup
+        android:id="@+id/duration_fragment_radio_group"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/duration_fragment_description_text_view" >
+
+        <RadioButton
+            android:id="@+id/first_radio_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/first_radio_button"
+            android:textSize="18sp" />
+
+        <RadioButton
+            android:id="@+id/second_radio_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/second_radio_button"
+            android:textSize="18sp"/>
+
+        <RadioButton
+            android:id="@+id/third_radio_button"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="@string/third_radio_button"
+            android:textSize="18sp"/>
+
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/duration_fragment_next_button"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/save_preferences_button"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/duration_fragment_radio_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

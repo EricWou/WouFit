@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.android.application)
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -8,7 +9,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.woufit"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -30,6 +31,8 @@ android {
 
 dependencies {
 
+    implementation(libs.firebase.auth)
+    implementation(libs.firebase.database)
     val room_version = "2.6.1"
 
     implementation("androidx.room:room-runtime:$room_version")

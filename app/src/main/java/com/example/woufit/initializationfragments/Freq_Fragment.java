@@ -17,8 +17,10 @@ public class Freq_Fragment extends Fragment {
 
     private NumberPicker freqFragmentNumberPicker;
     private Button freqFragmentNextButton;
-    private Users user;
+    private Users currentUser;
+    private String userID;
     private Preferences preferences;
+
     public Freq_Fragment() {
         super(R.layout.init_freq_fragment);
     }
@@ -27,23 +29,26 @@ public class Freq_Fragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        //retrieving bundle data from previous fragment
+        currentUser = requireArguments().getParcelable("user");
+        userID = requireArguments().getString("userID");
+        preferences = new Preferences();
+
         findViews(view);
 
         //setting min and max values for the Number Picker
         freqFragmentNumberPicker.setMinValue(1);
         freqFragmentNumberPicker.setMaxValue(7);
-        //freqFragmentNumberPicker.setWrapSelectorWheel(false);
+        //freqFragmentNumberPicker.setWrapSelectorWheel(false); - doesn't work?
 
         freqFragmentNextButton.setOnClickListener(v -> {
-            //retrieving bundle data from previous fragment
-            user = requireArguments().getParcelable("user");
-            preferences = requireArguments().getParcelable("preferences");
 
-            preferences.setFreqPerWeek(freqFragmentNumberPicker.getValue());
+            preferences.setFreqPerWeek(freqFragmentNumberPicker.getValue()-1);
 
             //sending along both user details and updated preferences
             Bundle bundle = new Bundle();
-            bundle.putParcelable("user", user);
+            bundle.putParcelable("user", currentUser);
+            bundle.putString("userID", userID);
             bundle.putParcelable("preferences", preferences);
 
             getParentFragmentManager().beginTransaction()
@@ -58,6 +63,7 @@ public class Freq_Fragment extends Fragment {
                     .replace(R.id.initialization_fragment_container, Duration_Fragment.class, bundle)
                     .commit();
         });
+
     }
 
     private void findViews(View view) {

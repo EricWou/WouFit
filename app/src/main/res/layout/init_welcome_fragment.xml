@@ -3,14 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#6FC4EC">
 
     <TextView
         android:id="@+id/welcome_fragment_title_text_view"
-        android:layout_width="250dp"
-        android:layout_height="40dp"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
         android:text="@string/welcome_fragment_title_text_view"
-        android:textSize="22sp"
+        android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
@@ -20,11 +22,14 @@
 
     <TextView
         android:id="@+id/welcome_fragment_greeting1_text_view"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="60dp"
         android:text="@string/welcome_fragment_greeting1_text_view"
+        android:textColor="#E1DADA"
         android:textSize="18sp"
+        android:shadowColor="#2C2A2A"
+        android:shadowRadius="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,11 +37,14 @@
 
     <TextView
         android:id="@+id/welcome_fragment_greeting2_text_view"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:text="@string/welcome_fragment_greeting2_text_view"
+        android:textColor="#E1DADA"
         android:textSize="18sp"
+        android:shadowColor="#2C2A2A"
+        android:shadowRadius="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,11 +52,14 @@
 
     <TextView
         android:id="@+id/welcome_fragment_greeting3_text_view"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="50dp"
         android:text="@string/welcome_fragment_greeting3_text_view"
+        android:textColor="#E1DADA"
         android:textSize="18sp"
+        android:shadowColor="#2C2A2A"
+        android:shadowRadius="5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +71,7 @@
         android:layout_height="50dp"
         android:layout_marginTop="80dp"
         android:text="@string/get_started_button"
+        android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"

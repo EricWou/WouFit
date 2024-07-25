@@ -13,12 +13,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.room.Room;
 
-import com.example.woufit.dao.SaltDao;
-import com.example.woufit.dao.UsersDao;
 import com.example.woufit.database.WouFitDatabase;
-import com.example.woufit.model.FormValidation;
-import com.example.woufit.model.PasswordHashing;
-import com.example.woufit.model.Salt;
 import com.example.woufit.model.Users;
 
 import java.security.NoSuchAlgorithmException;
@@ -31,23 +26,10 @@ public class MainActivity extends AppCompatActivity implements Executor {
     private Button loginButton;
     private Button registerButton;
     private WouFitDatabase db;
-    private UsersDao usersDao;
-    private SaltDao saltDao;
+    //private UsersDao usersDao;
+    //private SaltDao saltDao;
     public static String EXTRA_USER = "com.example.woufit.model.Users";
 
-    /*
-    public static String TAG = "WouFit Project";
-    public static String KEY_EMAIL = "email";
-    public static String KEY_PASSWORD = "password";
-     */
-
-    /*
-    Users user2 = new Users("Jon",
-                            "Snow",
-                            "lordcommander@gmail.com",
-                            "youknownothing",
-                            false);
-     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,60 +37,18 @@ public class MainActivity extends AppCompatActivity implements Executor {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        /*
         //initialize Room Persistence Library database and corresponding DAOs
         db = Room.databaseBuilder(getApplicationContext(),
                                 WouFitDatabase.class,
                           "woufit.db").build();
         usersDao = db.usersDao();
         saltDao = db.saltDao();
-
-        //used for generating the initial salt String and test user (comment after first use)
-        //createSaltStringAndTestUser();
-
-        findViews();
-
-        registerButton.setOnClickListener(v -> {
-            registerDialog();
-        });
-
-        loginButton.setOnClickListener(v1 -> {
-            //creates new Thread so that the database methods can happen in the background
-            execute(() -> {
-                String userEmail = emailInputEditText.getText().toString();
-                String userPassword = passwordInputEditText.getText().toString();
-
-                boolean loginSuccess = false;
-
-                //retrieving password from database if userEmail exists
-                String comparePassword = usersDao.compareLogin(userEmail);
-
-                if (comparePassword != null) {
-                    String saltString = saltDao.readSaltString();
-                    String hashPassword = PasswordHashing.hashPassword(userPassword, saltString);
-
-                    if (hashPassword.equals(comparePassword)) {
-                        loginSuccess = true;
-
-                        Users loginUser = usersDao.retrieveLoginUser(userEmail);
-
-                        Intent account_initialization_intent = new Intent(getApplicationContext(),
-                                account_initialization.class);
-                        account_initialization_intent.putExtra(EXTRA_USER, loginUser);
-
-                        startActivity(account_initialization_intent);
-                    }
-                }
-
-                if (!loginSuccess) {
-                    Toast.makeText(MainActivity.this, "Invalid email/password",
-                            Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        });
+        */
 
     }
 
+    /*
     //consider changing to a DialogFragment for more functionality (see documentation)
     private void registerDialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -165,34 +105,7 @@ public class MainActivity extends AppCompatActivity implements Executor {
             dialog.dismiss();
         });
     }
-
-    private void findViews() {
-        emailInputEditText = findViewById(R.id.email_input_edit_text);
-        passwordInputEditText = findViewById(R.id.password_input_edit_text);
-        loginButton = findViewById(R.id.login_button);
-        registerButton = findViewById(R.id.register_button);
-    }
-
-    //using methods from FormValidation model class
-    private boolean inputDataValidation(EditText firstName, EditText lastName, EditText email, EditText password) {
-        if (FormValidation.isEntryEmpty(firstName)) {
-            Toast.makeText(this, "Please enter a first name", Toast.LENGTH_SHORT).show();
-        }
-        else if (FormValidation.isEntryEmpty(lastName)) {
-            Toast.makeText(this, "Please enter a last name", Toast.LENGTH_SHORT).show();
-        }
-        else if (!FormValidation.isValidEmail(email)) {
-            Toast.makeText(this, "Please enter valid email", Toast.LENGTH_SHORT).show();
-        }
-        else if (FormValidation.isEntryEmpty(password)) {
-            //add password parameters?
-            Toast.makeText(this, "Please enter a password", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            return true;
-        }
-        return false;
-    }
+    */
 
     @Override
     public void execute(Runnable command) {
@@ -206,38 +119,6 @@ public class MainActivity extends AppCompatActivity implements Executor {
         }
     }
 
-    //used for generating the initial salt String and test user
-    private void createSaltStringAndTestUser() {
-        //creates new Thread so that the database methods can happen in the background
-        execute(() -> {
-            //creating saltString for 1st run
-            Salt salt;
-            try {
-                salt = new Salt(PasswordHashing.computeSalt());
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-            saltDao.createSaltString(salt);
 
-            //creating test user for 1st run
-            Users user1 = new Users("Jerry",
-                    "Springer",
-                    "test@gmail.com",
-                    "test",
-                    false);
-            String passwordToHash = user1.getUserPassword();
-            user1.setUserPassword(PasswordHashing.hashPassword(passwordToHash, salt.getSaltString()));
-
-            usersDao.createUser(user1);
-        });
-    }
-
-    /* maybe implement landscape mode
-    @Override
-    protected void onSaveInstanceState(@NonNull Bundle onSavedInstanceState) {
-        super.onSaveInstanceState(onSavedInstanceState);
-
-    }
-     */
 
 }

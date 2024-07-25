@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "360006773894",
+    "project_id": "woufit-9eff9",
+    "storage_bucket": "woufit-9eff9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:360006773894:android:d38acc3914610d8ba33507",
+        "android_client_info": {
+          "package_name": "com.example.woufit"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyARoBpykwDbDyl_M-xediu4H8HZRLuIqDs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

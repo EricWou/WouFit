@@ -1,44 +1,34 @@
 package com.example.woufit.model;
 
+
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 @Entity
 public class Exercises {
-
     @PrimaryKey(autoGenerate = true)
     private int exsID;
     private String exsName;
-    private String exsCategory;
-    private String equipmentNeeded;
-    private String difficulty;
-    private String primaryMuscle;
-    private String secondaryMuscle;
+    private String exsDescription;
+    private String exsBodyPart;
+    private String exsQualifier;
+    private String exsImageSrc;
 
     public Exercises() {
         this.exsID = 0;
         this.exsName = "";
-        this.exsCategory = "";
-        this.equipmentNeeded = "";
-        this.difficulty = "";
-        this.primaryMuscle = "";
-        this.secondaryMuscle = "";
+        this.exsDescription = "";
+        this.exsBodyPart = "";
+        this.exsQualifier = "";
+        this.exsImageSrc = "";
     }
-
-    public Exercises(int exsID,
-                     String exsName,
-                     String exsCategory,
-                     String equipmentNeeded,
-                     String difficulty,
-                     String primaryMuscle,
-                     String secondaryMuscle) {
+    public Exercises(int exsID, String exsName, String exsDescription, String exsBodyPart, String exsQualifier, String exsImageSrc) {
         this.exsID = exsID;
         this.exsName = exsName;
-        this.exsCategory = exsCategory;
-        this.equipmentNeeded = equipmentNeeded;
-        this.difficulty = difficulty;
-        this.primaryMuscle = primaryMuscle;
-        this.secondaryMuscle = secondaryMuscle;
+        this.exsDescription = exsDescription;
+        this.exsBodyPart = exsBodyPart;
+        this.exsQualifier = exsQualifier;
+        this.exsImageSrc = exsImageSrc;
     }
 
     public int getExsID() {
@@ -57,44 +47,36 @@ public class Exercises {
         this.exsName = exsName;
     }
 
-    public String getExsCategory() {
-        return exsCategory;
+    public String getExsDescription() {
+        return exsDescription;
     }
 
-    public void setExsCategory(String exsCategory) {
-        this.exsCategory = exsCategory;
+    public void setExsDescription(String exsDescription) {
+        this.exsDescription = exsDescription;
     }
 
-    public String getEquipmentNeeded() {
-        return equipmentNeeded;
+    public String getExsBodyPart() {
+        return exsBodyPart;
     }
 
-    public void setEquipmentNeeded(String equipmentNeeded) {
-        this.equipmentNeeded = equipmentNeeded;
+    public void setExsBodyPart(String exsBodyPart) {
+        this.exsBodyPart = exsBodyPart;
     }
 
-    public String getDifficulty() {
-        return difficulty;
+    public String getExsQualifier() {
+        return exsQualifier;
     }
 
-    public void setDifficulty(String difficulty) {
-        this.difficulty = difficulty;
+    public void setExsQualifier(String exsQualifier) {
+        this.exsQualifier = exsQualifier;
     }
 
-    public String getPrimaryMuscle() {
-        return primaryMuscle;
+    public String getExsImageSrc() {
+        return exsImageSrc;
     }
 
-    public void setPrimaryMuscle(String primaryMuscle) {
-        this.primaryMuscle = primaryMuscle;
-    }
-
-    public String getSecondaryMuscle() {
-        return secondaryMuscle;
-    }
-
-    public void setSecondaryMuscle(String secondaryMuscle) {
-        this.secondaryMuscle = secondaryMuscle;
+    public void setExsImageSrc(String exsImageSrc) {
+        this.exsImageSrc = exsImageSrc;
     }
 
     @Override
@@ -102,11 +84,10 @@ public class Exercises {
         return "Exercises{" +
                 "exsID=" + exsID +
                 ", exsName='" + exsName + '\'' +
-                ", exsCategory='" + exsCategory + '\'' +
-                ", equipmentNeeded='" + equipmentNeeded + '\'' +
-                ", difficulty='" + difficulty + '\'' +
-                ", primaryMuscle='" + primaryMuscle + '\'' +
-                ", secondaryMuscle='" + secondaryMuscle + '\'' +
+                ", exsDescription='" + exsDescription + '\'' +
+                ", exsBodyPart='" + exsBodyPart + '\'' +
+                ", exsQualifier='" + exsQualifier + '\'' +
+                ", exsImageSrc='" + exsImageSrc + '\'' +
                 '}';
     }
 }

@@ -1,21 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    //welcome_fragment
     <string name="welcome_fragment_title_text_view">Welcome</string>
-    <string name="welcome_fragment_greeting1_text_view">Before we get started we have a few
-        questions we would like you to answer</string>
-    <string name="welcome_fragment_greeting2_text_view">This will help us to personalize
-        your workout plan and will only take a few minutes</string>
-    <string name="welcome_fragment_greeting3_text_view">You can always go back to change your
-    answers and you will have a chance to review your choices at the end before confirming</string>
+    <string name="welcome_fragment_greeting1_text_view">WouFit is an application designed
+    to help people new to exercising to become more comfortable with being physically active.
+    All of the exercises shown here can be done at home with minimal to no equipment</string>
+    <string name="welcome_fragment_greeting2_text_view">Before we get started we have a couple
+        of questions we would like you to answer</string>
+    <string name="welcome_fragment_greeting3_text_view">This will help us to personalize
+        your workout plan and you can always change your plan later on</string>
     <string name="get_started_button">Get started</string>
 
-    <string name="goal_fragment_title_text_view">What are your goals for working out?</string>
-    <string name="goal_fragment_description_text_view">Select one of the following:</string>
-    <string name="strength_radio_button">Strength</string>
-    <string name="endurance_radio_button">Endurance</string>
-    <string name="flexibility_radio_button">Flexibility</string>
-    <string name="next_button">Next</string>
-
+    //freq_fragment
     <string name="freq_fragment_title_text_view">How many different workouts in a week would you like?</string>
+
+    //duration_fragment
+    <string name="duration_fragment_title_text_view">How long would you like each workout to be?</string>
+    <string name="duration_fragment_description_text_view">Select one of the following.
+    These are general estimates, you may finish these workouts faster than the suggested time</string>
+    <string name="first_radio_button">20 minutes</string>
+    <string name="second_radio_button">30 minutes</string>
+    <string name="third_radio_button">45 minutes</string>
+    <string name="next_button">Next</string>
+    <string name="save_preferences_button">Finish and save preferences</string>
 
 </resources>
