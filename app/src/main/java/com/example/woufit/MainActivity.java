@@ -2,34 +2,58 @@ package com.example.woufit;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.room.Room;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import cz.msebera.android.httpclient.Header;
 
 import com.example.woufit.database.WouFitDatabase;
 import com.example.woufit.model.Users;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.concurrent.Executor;
 
-public class MainActivity extends AppCompatActivity implements Executor {
+public class MainActivity extends AppCompatActivity {
 
-    private EditText emailInputEditText;
-    private EditText passwordInputEditText;
-    private Button loginButton;
-    private Button registerButton;
-    private WouFitDatabase db;
-    //private UsersDao usersDao;
-    //private SaltDao saltDao;
-    public static String EXTRA_USER = "com.example.woufit.model.Users";
+    private Toolbar upperToolbar;
+    private TextView inspirationQuoteTextView;
+    private TextView inspirationAuthorTextView;
+    private Button startWorkoutButton;
+    private TextView mainWorkoutTextView;
+    private Button nextWorkoutButton;
+    private Toolbar bottomToolbar;
+    private String userID;
+    DatabaseReference databaseRef;
+    private HashMap<String, HashMap<String, Integer>> programData;
 
+
+    //to allow use of online APIs, need to have this in the AndroidManifest.xml
+    //<uses-permission android:name="android.permission.INTERNET"/>
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,76 +61,116 @@ public class MainActivity extends AppCompatActivity implements Executor {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        /*
-        //initialize Room Persistence Library database and corresponding DAOs
-        db = Room.databaseBuilder(getApplicationContext(),
-                                WouFitDatabase.class,
-                          "woufit.db").build();
-        usersDao = db.usersDao();
-        saltDao = db.saltDao();
-        */
+        findViews();
+        bottomToolbar.inflateMenu(R.menu.bottom_menu);
 
+        userID = getIntent().getExtras().getString("userID");
+
+        //gets the inspirational quote of the day from an external API
+        fetchInspiration();
+
+        //retrieves program data for the user
+        fetchWorkouts();
+
+
+
+    }
+
+    private void fetchInspiration() {
+
+        String mode = "random";
+        String uri = "https://zenquotes.io/api/"+mode;
+        new AsyncHttpClient().get(uri, new AsyncHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+
+                try {
+                    //converts responseBody to String format
+                    String responseString = new String(responseBody);
+
+                    //converts responseString to JSONArray
+                    JSONArray responseArray = new JSONArray(responseString);
+
+                    //convert JSONArray to JSONObject (the response is always just 1 element)
+                    JSONObject response = responseArray.getJSONObject(0);
+
+                    String quote = response.getString("q");
+                    String author = response.getString("a");
+
+                    inspirationQuoteTextView.setText(quote);
+                    inspirationAuthorTextView.setText("-"+author);
+
+                } catch (JSONException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+            }
+        });
+    }
+
+    private void fetchWorkouts() {
+        databaseRef = FirebaseDatabase.getInstance().getReference();
+
+        databaseRef.child("Users")
+                .child(userID)
+                .child("Program").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        //wanting to save all the information with programData as the top level parent
+                        programData = new HashMap<>();
+
+                        //retrieving each workout listed under "program"
+                        for(DataSnapshot workoutSnapshot : snapshot.getChildren()) {
+                            String workoutName = workoutSnapshot.getKey();
+
+                            HashMap<String, Integer> workoutData = new HashMap<>();
+
+                            //retrieving each exercise listed under each workout
+                            for (DataSnapshot exerciseSnapshot : workoutSnapshot.getChildren()) {
+                                String exerciseName = exerciseSnapshot.getKey();
+                                Integer exerciseID = exerciseSnapshot.getValue(Integer.class);
+
+                                workoutData.put(exerciseName, exerciseID);
+                            }
+
+                            programData.put(workoutName, workoutData);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+    }
+
+    private void setScrollView() {
+
+        String testView = "";
+
+        for (int i=0; i<programData.size(); i++) {
+            testView += programData.get("Workout"+(i+1)).toString();
+        }
+
+        mainWorkoutTextView.setText(testView);
+    }
+
+    private void findViews() {
+        upperToolbar = findViewById(R.id.upper_toolbar);
+        inspirationQuoteTextView = findViewById(R.id.inspiration_quote_textView);
+        inspirationAuthorTextView = findViewById(R.id.inspiration_author_textView);
+        startWorkoutButton = findViewById(R.id.start_workout_button);
+        mainWorkoutTextView = findViewById(R.id.main_workout_textView);
+        nextWorkoutButton = findViewById(R.id.next_workout_button);
+        bottomToolbar = findViewById(R.id.bottom_toolbar);
     }
 
     /*
-    //consider changing to a DialogFragment for more functionality (see documentation)
-    private void registerDialog() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-
-        //adds the custom register_layout to the AlertDialog builder object
-        final View registerLayout = getLayoutInflater().inflate(R.layout.register_layout, null);
-        builder.setView(registerLayout);
-
-        //shows the dialog
-        AlertDialog dialog = builder.create();
-        dialog.show();
-
-        //looking for register button to add onClickListener
-        Button confirmRegistration = registerLayout.findViewById(R.id.register_confirm_button);
-        confirmRegistration.setOnClickListener(v -> {
-
-            EditText firstNameEditText = registerLayout.findViewById(R.id.first_name_register_edit_text);
-            EditText lastNameEditText = registerLayout.findViewById(R.id.last_name_register_edit_text);
-            EditText emailEditTExt = registerLayout.findViewById(R.id.email_register_edit_text);
-            EditText passwordEditText = registerLayout.findViewById(R.id.password_register_edit_text);
-
-            //making sure the data entries are valid
-            if (inputDataValidation(firstNameEditText, lastNameEditText, emailEditTExt, passwordEditText)) {
-                String firstName = firstNameEditText.getText().toString();
-                String lastName = lastNameEditText.getText().toString();
-                String email = emailEditTExt.getText().toString();
-                String password = passwordEditText.getText().toString();
-
-                Users newUser = new Users(firstName, lastName, email, password, true);
-
-                //the Thread can be a small part of a bigger code
-                execute(() -> {
-                    String saltString = saltDao.readSaltString();
-                    String hashPassword = PasswordHashing.hashPassword(newUser.getUserPassword(), saltString);
-                    newUser.setUserPassword(hashPassword);
-
-                    usersDao.createUser(newUser);
-                });
-
-                //sets the email on login page to newly created account
-                emailInputEditText.setText(email);
-
-                dialog.dismiss();
-
-                Toast.makeText(MainActivity.this, "Account successfully created" ,
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //looking for close button to add onClickListener
-        ImageButton toolbarCloseButton = registerLayout.findViewById(R.id.register_toolbar)
-                                                        .findViewById(R.id.register_toolbar_close_button);
-        toolbarCloseButton.setOnClickListener(v1 -> {
-            dialog.dismiss();
-        });
-    }
-    */
-
     @Override
     public void execute(Runnable command) {
         Thread thread = new Thread(command);
@@ -119,6 +183,6 @@ public class MainActivity extends AppCompatActivity implements Executor {
         }
     }
 
-
+     */
 
 }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_title_text_view">WouFit</string>
-    <string name="email_title_text_view">Email</string>
-    <string name="email_input_edit_text"> </string>
-    <string name="password_title_text_view">Password</string>
-    <string name="password_input_edit_text"> </string>
-    <string name="login_button">Login</string>
-    <string name="register_title_text_view">Don\'t already have an account?</string>
-    <string name="register_button">Register now</string>
+    <string name="inspiration_quote_textView"></string>
+    <string name="inspiration_author_textView"></string>
+    <string name="start_workout_button">Start Workout</string>
+    <string name="main_workout_textView"></string>
+    <string name="next_workout_button">Next Workout</string>
+    <string name="inspirational_title_textView">Inspirational quote of the day</string>
+
+
 </resources>

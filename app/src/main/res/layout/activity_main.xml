@@ -5,9 +5,110 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="#6FC4EC"
+    android:fitsSystemWindows="true">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/upper_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:title="WouFit"
+        app:titleTextColor="#FAF7F7"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
 
+    <TextView
+        android:id="@+id/inspiration_title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:layout_marginTop="10dp"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        android:text="@string/inspirational_title_textView"
+        app:layout_constraintEnd_toEndOf="@+id/upper_toolbar"
+        app:layout_constraintStart_toStartOf="@+id/upper_toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/upper_toolbar" />
+
+    <TextView
+        android:id="@+id/inspiration_quote_textView"
+        android:layout_width="300dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/inspiration_quote_textView"
+        android:textSize="20sp"
+        android:textStyle="italic"
+        android:textAlignment="center"
+        app:layout_constraintEnd_toEndOf="@+id/inspiration_title_textView"
+        app:layout_constraintStart_toStartOf="@+id/inspiration_title_textView"
+        app:layout_constraintTop_toBottomOf="@+id/inspiration_title_textView" />
+
+    <TextView
+        android:id="@+id/inspiration_author_textView"
+        android:layout_width="300dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/inspiration_author_textView"
+        android:textSize="14sp"
+        android:textAlignment="textEnd"
+        app:layout_constraintEnd_toEndOf="@+id/inspiration_quote_textView"
+        app:layout_constraintStart_toStartOf="@+id/inspiration_quote_textView"
+        app:layout_constraintTop_toBottomOf="@+id/inspiration_quote_textView" />
+
+    <Button
+        android:id="@+id/start_workout_button"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/start_workout_button"
+        app:layout_constraintEnd_toEndOf="@+id/inspiration_author_textView"
+        app:layout_constraintStart_toStartOf="@+id/inspiration_author_textView"
+        app:layout_constraintTop_toBottomOf="@+id/inspiration_author_textView" />
+
+    <ScrollView
+        android:id="@+id/main_workout_scrollView"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/start_workout_button"
+        app:layout_constraintStart_toStartOf="@+id/start_workout_button"
+        app:layout_constraintTop_toBottomOf="@+id/start_workout_button">
+
+        <TextView
+            android:id="@+id/main_workout_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/main_workout_textView" />
+
+    </ScrollView>
+
+    <Button
+        android:id="@+id/next_workout_button"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:text="@string/next_workout_button"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="@+id/main_workout_scrollView"
+        app:layout_constraintStart_toStartOf="@+id/main_workout_scrollView"
+        app:layout_constraintTop_toBottomOf="@+id/main_workout_scrollView" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/bottom_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginTop="60dp"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:menu="@menu/bottom_menu"
+        app:layout_constraintEnd_toEndOf="@+id/next_workout_button"
+        app:layout_constraintStart_toStartOf="@+id/next_workout_button"
+        app:layout_constraintTop_toBottomOf="@+id/next_workout_button" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

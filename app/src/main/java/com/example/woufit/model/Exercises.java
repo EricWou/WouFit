@@ -10,25 +10,41 @@ public class Exercises {
     private int exsID;
     private String exsName;
     private String exsDescription;
+    private String exsExtraTip;
     private String exsBodyPart;
     private String exsQualifier;
-    private String exsImageSrc;
+    private String exsStartImageSrc;
+    private String exsEndImageSrc;
 
     public Exercises() {
         this.exsID = 0;
         this.exsName = "";
         this.exsDescription = "";
+        this.exsExtraTip = "";
         this.exsBodyPart = "";
         this.exsQualifier = "";
-        this.exsImageSrc = "";
+        this.exsStartImageSrc = "";
+        this.exsEndImageSrc = "";
     }
-    public Exercises(int exsID, String exsName, String exsDescription, String exsBodyPart, String exsQualifier, String exsImageSrc) {
+    public Exercises(int exsID, String exsName, String exsDescription, String exsExtraTip, String exsBodyPart, String exsQualifier, String exsStartImageSrc, String exsEndImageSrc) {
         this.exsID = exsID;
         this.exsName = exsName;
         this.exsDescription = exsDescription;
+        this.exsExtraTip = exsExtraTip;
         this.exsBodyPart = exsBodyPart;
         this.exsQualifier = exsQualifier;
-        this.exsImageSrc = exsImageSrc;
+        this.exsStartImageSrc = exsStartImageSrc;
+        this.exsEndImageSrc = exsEndImageSrc;
+    }
+
+    public Exercises(String exsName, String exsDescription, String exsExtraTip, String exsBodyPart, String exsQualifier, String exsStartImageSrc, String exsEndImageSrc) {
+        this.exsName = exsName;
+        this.exsDescription = exsDescription;
+        this.exsExtraTip = exsExtraTip;
+        this.exsBodyPart = exsBodyPart;
+        this.exsQualifier = exsQualifier;
+        this.exsStartImageSrc = exsStartImageSrc;
+        this.exsEndImageSrc = exsEndImageSrc;
     }
 
     public int getExsID() {
@@ -55,6 +71,14 @@ public class Exercises {
         this.exsDescription = exsDescription;
     }
 
+    public String getExsExtraTip() {
+        return exsExtraTip;
+    }
+
+    public void setExsExtraTip(String exsExtraTip) {
+        this.exsExtraTip = exsExtraTip;
+    }
+
     public String getExsBodyPart() {
         return exsBodyPart;
     }
@@ -71,12 +95,20 @@ public class Exercises {
         this.exsQualifier = exsQualifier;
     }
 
-    public String getExsImageSrc() {
-        return exsImageSrc;
+    public String getExsStartImageSrc() {
+        return exsStartImageSrc;
     }
 
-    public void setExsImageSrc(String exsImageSrc) {
-        this.exsImageSrc = exsImageSrc;
+    public void setExsStartImageSrc(String exsStartImageSrc) {
+        this.exsStartImageSrc = exsStartImageSrc;
+    }
+
+    public String getExsEndImageSrc() {
+        return exsEndImageSrc;
+    }
+
+    public void setExsEndImageSrc(String exsEndImageSrc) {
+        this.exsEndImageSrc = exsEndImageSrc;
     }
 
     @Override
@@ -85,9 +117,11 @@ public class Exercises {
                 "exsID=" + exsID +
                 ", exsName='" + exsName + '\'' +
                 ", exsDescription='" + exsDescription + '\'' +
+                ", exsExtraTip='" + exsExtraTip + '\'' +
                 ", exsBodyPart='" + exsBodyPart + '\'' +
                 ", exsQualifier='" + exsQualifier + '\'' +
-                ", exsImageSrc='" + exsImageSrc + '\'' +
+                ", exsStartImageSrc='" + exsStartImageSrc + '\'' +
+                ", exsEndImageSrc='" + exsEndImageSrc + '\'' +
                 '}';
     }
 }

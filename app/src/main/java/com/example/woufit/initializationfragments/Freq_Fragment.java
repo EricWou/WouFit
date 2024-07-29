@@ -38,12 +38,12 @@ public class Freq_Fragment extends Fragment {
 
         //setting min and max values for the Number Picker
         freqFragmentNumberPicker.setMinValue(1);
-        freqFragmentNumberPicker.setMaxValue(7);
+        freqFragmentNumberPicker.setMaxValue(3);
         //freqFragmentNumberPicker.setWrapSelectorWheel(false); - doesn't work?
 
         freqFragmentNextButton.setOnClickListener(v -> {
 
-            preferences.setFreqPerWeek(freqFragmentNumberPicker.getValue()-1);
+            preferences.setFreqPerWeek(freqFragmentNumberPicker.getValue());
 
             //sending along both user details and updated preferences
             Bundle bundle = new Bundle();

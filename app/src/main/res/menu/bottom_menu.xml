@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/home_menu_toolbar"
+        android:icon="@drawable/home"
+        app:showAsAction="ifRoom"
+        android:title="Item1" />
+
+    <item
+        android:id="@+id/programs_menu_toolbar"
+        android:icon="@drawable/programs"
+        app:showAsAction="ifRoom"
+        android:title="Item2" />
+
+    <item
+        android:id="@+id/profile_menu_toolbar"
+        android:icon="@drawable/profile"
+        app:showAsAction="ifRoom"
+        android:title="Item3" />
+
+</menu>
