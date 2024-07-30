@@ -94,89 +94,93 @@ public class StartActivity extends AppCompatActivity {
             String email = emailEditText.getText().toString();
             String password = passwordEditText.getText().toString();
 
-            auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(StartActivity.this, new OnCompleteListener<AuthResult>() {
-                @Override
-                public void onComplete(@NonNull Task<AuthResult> task) {
+            if (!email.isEmpty() || !password.isEmpty() || !firstName.isEmpty() || !lastName.isEmpty()) {
+                auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(StartActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    if(task.isSuccessful())
-                    {
-                        //retrieves firebase defined unique key for the user registering in
-                        String userID = auth.getUid();
+                        if (task.isSuccessful()) {
+                            //retrieves firebase defined unique key for the user registering in
+                            String userID = auth.getUid();
 
-                        //creates new User in firebase
-                        Users newUser = new Users(firstName, lastName, true);
-                        databaseRef.child("Users")
+                            //creates new User in firebase
+                            Users newUser = new Users(firstName, lastName, true);
+                            databaseRef.child("Users")
                                     .child(userID)
                                     .setValue(newUser);
 
-                        //sets the email on login page to newly created account
-                        emailInputEditText.setText(email);
+                            //sets the email on login page to newly created account
+                            emailInputEditText.setText(email);
 
-                        dialog.dismiss();
+                            dialog.dismiss();
 
-                        Toast.makeText(StartActivity.this, "Account successfully created",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(StartActivity.this, "Account successfully created", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(StartActivity.this, "Please input a proper email/password", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                    else
-                    {
-                        Toast.makeText(StartActivity.this, "Registration failed", Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
+                });
+            }
+            else {
+                Toast.makeText(StartActivity.this, "please fill out all required fields", Toast.LENGTH_SHORT).show();
+            }
 
         });
     }
 
     private void login(String email, String password){
-        auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                if(task.isSuccessful())
-                {
-                    //do you even see this?
-                    Toast.makeText(StartActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
+        if (!email.isEmpty() || !password.isEmpty()) {
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
 
-                    String userID = auth.getUid();
-                    databaseRef.child("Users").addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(StartActivity.this, "Login successful", Toast.LENGTH_SHORT).show();
 
-                            for(DataSnapshot ss:snapshot.getChildren()) {
-                                if (ss.getKey().equals(userID)) {
-                                    boolean firstLogin = ss.getValue(Users.class).getFirstLogin();
+                        String userID = auth.getUid();
+                        databaseRef.child("Users").addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                                    //ss.getValue(Users.class) properly retrieves
-                                    //Log.d("firstLogin", ss.getValue(Users.class).toString());
+                                for (DataSnapshot ss : snapshot.getChildren()) {
+                                    if (ss.getKey().equals(userID)) {
+                                        boolean firstLogin = ss.getValue(Users.class).getFirstLogin();
 
-                                    Bundle bundle = new Bundle();
-                                    bundle.putString("userID", userID);
+                                        //ss.getValue(Users.class) properly retrieves
+                                        //Log.d("firstLogin", ss.getValue(Users.class).toString());
 
-                                    if (firstLogin) {
-                                        //go to account_initialization activity
-                                        Intent nextActivity = new Intent(StartActivity.this, account_initialization.class);
-                                        nextActivity.putExtras(bundle);
-                                        startActivity(nextActivity);
-                                    }
-                                    else {
-                                        Intent nextActivity = new Intent(StartActivity.this, MainActivity.class);
-                                        nextActivity.putExtras(bundle);
-                                        startActivity(nextActivity, bundle);
+                                        Bundle bundle = new Bundle();
+                                        bundle.putString("userID", userID);
+
+                                        if (firstLogin) {
+                                            //go to account_initialization activity
+                                            Intent nextActivity = new Intent(StartActivity.this, account_initialization.class);
+                                            nextActivity.putExtras(bundle);
+                                            startActivity(nextActivity);
+                                        } else {
+                                            Intent nextActivity = new Intent(StartActivity.this, MainActivity.class);
+                                            nextActivity.putExtras(bundle);
+                                            startActivity(nextActivity, bundle);
+                                        }
                                     }
                                 }
                             }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
 
-                        }
-                    });
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+                    } else {
+                        Toast.makeText(StartActivity.this, "Invalid email/password", Toast.LENGTH_SHORT).show();
+                    }
                 }
-                else
-                {
-                    Toast.makeText(StartActivity.this, "Invalid email/password", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+            });
+        }
+        else {
+            Toast.makeText(StartActivity.this, "please input your email/password", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void findViews() {
