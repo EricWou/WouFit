@@ -6,6 +6,8 @@
     <string name="main_workout_textView"></string>
     <string name="next_workout_button">Next Workout</string>
     <string name="inspirational_title_textView">Inspirational quote of the day</string>
-
+    <string name="main_item_exercise_textView"> </string>
+    <string name="main_workout_title_textView"> </string>
+    <string name="main_exercise_textView"> </string>
 
 </resources>

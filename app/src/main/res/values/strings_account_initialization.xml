@@ -13,6 +13,10 @@
 
     //freq_fragment
     <string name="freq_fragment_title_text_view">How many different workouts in a week would you like?</string>
+    <string name="freq_first_radio_button">One</string>
+    <string name="freq_second_radio_button">Two</string>
+    <string name="freq_third_radio_button">Three</string>
+
 
     //duration_fragment
     <string name="duration_fragment_title_text_view">How long would you like each workout to be?</string>
@@ -23,5 +27,7 @@
     <string name="third_radio_button">45 minutes</string>
     <string name="next_button">Next</string>
     <string name="save_preferences_button">Finish and save preferences</string>
+
+
 
 </resources>

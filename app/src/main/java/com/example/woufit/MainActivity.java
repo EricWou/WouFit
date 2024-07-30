@@ -15,7 +15,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.room.Room;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,8 +48,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView inspirationQuoteTextView;
     private TextView inspirationAuthorTextView;
     private Button startWorkoutButton;
-    private TextView mainWorkoutTextView;
-    private Button nextWorkoutButton;
+    //private TextView mainWorkoutTextView;
+    private ViewPager2 mainViewPager;
     private Toolbar bottomToolbar;
     private String userID;
     DatabaseReference databaseRef;
@@ -61,18 +65,23 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        //helps to place Toolbar correctly
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(0, systemBars.top, 0, 0);
+            return insets;
+        });
+
         findViews();
-        bottomToolbar.inflateMenu(R.menu.bottom_menu);
+        //bottomToolbar.inflateMenu(R.menu.bottom_menu);
 
         userID = getIntent().getExtras().getString("userID");
 
-        //gets the inspirational quote of the day from an external API
+        //gets the inspirational quote of the day from  an external API
         fetchInspiration();
 
         //retrieves program data for the user
         fetchWorkouts();
-
-
 
     }
 
@@ -140,6 +149,10 @@ public class MainActivity extends AppCompatActivity {
 
                             programData.put(workoutName, workoutData);
                         }
+
+                        //sets the adapter for ViewPager2 (to allow for horizontal swiping between workouts)
+                        WorkoutAdapter workoutAdapter = new WorkoutAdapter(programData);
+                        mainViewPager.setAdapter(workoutAdapter);
                     }
 
                     @Override
@@ -149,40 +162,14 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void setScrollView() {
-
-        String testView = "";
-
-        for (int i=0; i<programData.size(); i++) {
-            testView += programData.get("Workout"+(i+1)).toString();
-        }
-
-        mainWorkoutTextView.setText(testView);
-    }
-
     private void findViews() {
         upperToolbar = findViewById(R.id.upper_toolbar);
         inspirationQuoteTextView = findViewById(R.id.inspiration_quote_textView);
         inspirationAuthorTextView = findViewById(R.id.inspiration_author_textView);
         startWorkoutButton = findViewById(R.id.start_workout_button);
-        mainWorkoutTextView = findViewById(R.id.main_workout_textView);
-        nextWorkoutButton = findViewById(R.id.next_workout_button);
+        mainViewPager = findViewById(R.id.main_viewPager);
         bottomToolbar = findViewById(R.id.bottom_toolbar);
     }
 
-    /*
-    @Override
-    public void execute(Runnable command) {
-        Thread thread = new Thread(command);
-        thread.start();
-
-        try {
-            thread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
-     */
 
 }

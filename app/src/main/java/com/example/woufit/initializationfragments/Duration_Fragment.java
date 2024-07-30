@@ -233,6 +233,7 @@ public class Duration_Fragment extends Fragment {
         List<Exercises> list = new ArrayList<>();
     }
 
+    //for running the database operations on a background thread
     public void execute(Runnable command) {
         Thread thread = new Thread(command);
         thread.start();

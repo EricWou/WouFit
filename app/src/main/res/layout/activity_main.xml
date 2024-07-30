@@ -38,7 +38,7 @@
     <TextView
         android:id="@+id/inspiration_quote_textView"
         android:layout_width="300dp"
-        android:layout_height="70dp"
+        android:layout_height="100dp"
         android:layout_marginTop="10dp"
         android:text="@string/inspiration_quote_textView"
         android:textSize="20sp"
@@ -60,16 +60,50 @@
         app:layout_constraintStart_toStartOf="@+id/inspiration_quote_textView"
         app:layout_constraintTop_toBottomOf="@+id/inspiration_quote_textView" />
 
-    <Button
-        android:id="@+id/start_workout_button"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/start_workout_button"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/main_viewPager"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="@+id/inspiration_author_textView"
         app:layout_constraintStart_toStartOf="@+id/inspiration_author_textView"
         app:layout_constraintTop_toBottomOf="@+id/inspiration_author_textView" />
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_left"
+        app:layout_constraintBottom_toBottomOf="@+id/main_viewPager"
+        app:layout_constraintEnd_toStartOf="@+id/main_viewPager"
+        app:layout_constraintTop_toTopOf="@+id/main_viewPager" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_right"
+        app:layout_constraintBottom_toBottomOf="@+id/main_viewPager"
+        app:layout_constraintStart_toEndOf="@+id/main_viewPager"
+        app:layout_constraintTop_toTopOf="@+id/main_viewPager" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/arrow_down"
+        app:layout_constraintTop_toBottomOf="@+id/main_viewPager"
+        app:layout_constraintStart_toStartOf="@+id/main_viewPager"
+        app:layout_constraintEnd_toEndOf="@+id/main_viewPager" />
+
+    <Button
+        android:id="@+id/start_workout_button"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/start_workout_button"
+        app:layout_constraintEnd_toEndOf="@+id/main_viewPager"
+        app:layout_constraintStart_toStartOf="@+id/main_viewPager"
+        app:layout_constraintTop_toBottomOf="@+id/main_viewPager" />
+
+    <!--
     <ScrollView
         android:id="@+id/main_workout_scrollView"
         android:layout_width="300dp"
@@ -96,19 +130,19 @@
         app:layout_constraintEnd_toEndOf="@+id/main_workout_scrollView"
         app:layout_constraintStart_toStartOf="@+id/main_workout_scrollView"
         app:layout_constraintTop_toBottomOf="@+id/main_workout_scrollView" />
+    -->
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/bottom_toolbar"
         android:layout_width="match_parent"
         android:layout_height="60dp"
-        android:layout_marginTop="60dp"
         android:background="?attr/colorPrimary"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:menu="@menu/bottom_menu"
-        app:layout_constraintEnd_toEndOf="@+id/next_workout_button"
-        app:layout_constraintStart_toStartOf="@+id/next_workout_button"
-        app:layout_constraintTop_toBottomOf="@+id/next_workout_button" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+        <!-- app:menu="@menu/bottom_menu"-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
